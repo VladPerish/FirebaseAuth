@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         mEmailField = (EditText) findViewById(R.id.emailField);
         mPasswordField = (EditText) findViewById(R.id.passwordField);
 
-        mLoginBtn = (Button) findViewById(R.id.loginBtn);
+        mLoginBtn = (Button)    findViewById(R.id.loginBtn);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
