@@ -30,26 +30,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
-        mEmailField=(EditText) findViewById(R.id.emailField);
-        mPasswordField=(EditText) findViewById(R.id.passwordField);
+        mEmailField = (EditText) findViewById(R.id.emailField);
+        mPasswordField = (EditText) findViewById(R.id.passwordField);
 
-        mLoginBtn=(Button) findViewById(R.id.loginBtn);
+        mLoginBtn = (Button) findViewById(R.id.loginBtn);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-                if(firebaseAuth.getCurrentUser() != null){
+                if (firebaseAuth.getCurrentUser() != null) {
 
-                    startActivity(new Intent(MainActivity.this,AccountActivity.class));
+                    startActivity(new Intent(MainActivity.this, AccountActivity.class));
                 }
 
             }
         };
-
-
 
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -60,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-        }
+    }
 
     @Override
     protected void onStart() {
@@ -70,32 +67,31 @@ public class MainActivity extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-    private void startSignIn(){
+    private void startSignIn() {
 
-            String email= mEmailField.getText().toString();
-            String password= mPasswordField.getText().toString();
+        String email = mEmailField.getText().toString();
+        String password = mPasswordField.getText().toString();
 
-            if(TextUtils.isEmpty(email)||TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
 
-                Toast.makeText(this, "Fields are empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Fields are empty", Toast.LENGTH_LONG).show();
 
-            }
-            else{
-                mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+        } else {
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (!task.isSuccessful()){
-                            Toast.makeText(MainActivity.this, "Sign in error! ", Toast.LENGTH_LONG).show();
-                        }
-
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Sign in error! ", Toast.LENGTH_LONG).show();
                     }
-                });
 
-            }
-
+                }
+            });
 
         }
+
+
     }
+}
 
 
